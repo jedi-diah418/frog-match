@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>🐸 Frog Match - Match 3 Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <div class="screen-content">
+            <h1 class="title">🐸 Frog Match</h1>
+            <p class="subtitle">Match the froggies!</p>
+            <button id="play-btn" class="btn btn-large btn-primary">Play</button>
+            <button id="how-to-play-btn" class="btn btn-secondary">How to Play</button>
+            <button id="settings-btn" class="btn btn-secondary">Settings</button>
+        </div>
+    </div>
+
+    <!-- Level Select Screen -->
+    <div id="level-select-screen" class="screen">
+        <div class="screen-content">
+            <h2 class="screen-title">Select Level</h2>
+            <div id="level-grid" class="level-grid"></div>
+            <button id="back-to-start-btn" class="btn btn-secondary">Back</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <!-- HUD -->
+        <div class="hud">
+            <button id="pause-btn" class="btn-icon">⏸️</button>
+            <div class="hud-info">
+                <div class="hud-item">
+                    <span class="hud-label">Level</span>
+                    <span id="level-number" class="hud-value">1</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Score</span>
+                    <span id="score-value" class="hud-value">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Moves</span>
+                    <span id="moves-value" class="hud-value">20</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objectives -->
+        <div id="objectives-container" class="objectives-container"></div>
+
+        <!-- Game Board -->
+        <div id="game-board-container" class="game-board-container">
+            <canvas id="game-canvas"></canvas>
+        </div>
+    </div>
+
+    <!-- How to Play Screen -->
+    <div id="how-to-play-screen" class="screen">
+        <div class="screen-content">
+            <h2 class="screen-title">How to Play</h2>
+            <div class="instructions">
+                <div class="instruction-item">
+                    <div class="instruction-icon">👆</div>
+                    <p><strong>Swap Frogs:</strong> Tap and drag to swap adjacent frogs</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">🐸🐸🐸</div>
+                    <p><strong>Match 3+:</strong> Match 3 or more frogs of the same color</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">⚡</div>
+                    <p><strong>Special Frogs:</strong> Match 4+ for power-ups!</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-text">
+                        <p>🔵🔵🔵🔵 = <strong>Striped Frog</strong> (clears row/column)</p>
+                        <p>🔵🔵🔵🔵🔵 = <strong>Rainbow Frog</strong> (clears all of one color)</p>
+                        <p>L or T shape = <strong>Bomb Frog</strong> (3×3 explosion)</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">🎯</div>
+                    <p><strong>Objectives:</strong> Complete goals before running out of moves</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">⭐⭐⭐</div>
+                    <p><strong>Stars:</strong> Score higher for more stars!</p>
+                </div>
+            </div>
+            <button id="close-instructions-btn" class="btn btn-primary">Got It!</button>
+        </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="screen">
+        <div class="screen-content">
+            <h2 class="screen-title">Settings</h2>
+            <div class="settings-container">
+                <div class="setting-item">
+                    <label for="sound-toggle">Sound Effects</label>
+                    <input type="checkbox" id="sound-toggle" class="toggle">
+                </div>
+                <div class="setting-item">
+                    <label for="music-toggle">Music</label>
+                    <input type="checkbox" id="music-toggle" class="toggle">
+                </div>
+                <div class="setting-item">
+                    <button id="reset-progress-btn" class="btn btn-danger">Reset Progress</button>
+                </div>
+            </div>
+            <button id="close-settings-btn" class="btn btn-primary">Done</button>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div id="pause-modal" class="modal">
+        <div class="modal-content">
+            <h2>Paused</h2>
+            <button id="resume-btn" class="btn btn-primary">Resume</button>
+            <button id="restart-level-btn" class="btn btn-secondary">Restart Level</button>
+            <button id="quit-to-menu-btn" class="btn btn-secondary">Quit to Menu</button>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="victory-modal" class="modal">
+        <div class="modal-content">
+            <h2>🎉 Level Complete! 🎉</h2>
+            <div id="stars-container" class="stars-container"></div>
+            <p class="final-score">Score: <span id="final-score-value">0</span></p>
+            <button id="next-level-btn" class="btn btn-primary">Next Level</button>
+            <button id="replay-level-btn" class="btn btn-secondary">Replay</button>
+            <button id="victory-menu-btn" class="btn btn-secondary">Menu</button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="modal">
+        <div class="modal-content">
+            <h2>😢 Out of Moves!</h2>
+            <p class="final-score">Score: <span id="game-over-score-value">0</span></p>
+            <button id="retry-level-btn" class="btn btn-primary">Try Again</button>
+            <button id="game-over-menu-btn" class="btn btn-secondary">Menu</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
