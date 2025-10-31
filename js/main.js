@@ -4,10 +4,13 @@ import { Game } from './game.js';
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🐸 Frog Match - Starting game...');
 
-    // Create game instance
-    window.game = new Game();
-
-    console.log('🐸 Game initialized! Ready to play!');
+    try {
+        // Create game instance
+        window.game = new Game();
+        console.log('🐸 Game initialized! Ready to play!');
+    } catch (error) {
+        console.error('Failed to initialize game:', error);
+    }
 });
 
 // Prevent pull-to-refresh on mobile

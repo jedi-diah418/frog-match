@@ -57,7 +57,7 @@ export class Game {
     }
 
     setupCanvas() {
-        const resizeCanvas = () => {
+        this.resizeCanvas = () => {
             const container = document.getElementById('game-board-container');
             const maxSize = Math.min(container.clientWidth, container.clientHeight) - 40;
             const size = Math.min(maxSize, 600);
@@ -68,10 +68,12 @@ export class Game {
             this.cellSize = size / this.board.size;
             this.boardOffsetX = 0;
             this.boardOffsetY = 0;
+
+            console.log(`Canvas resized to ${size}x${size}, cell size: ${this.cellSize}`);
         };
 
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        this.resizeCanvas();
+        window.addEventListener('resize', this.resizeCanvas);
     }
 
     setupInput() {
@@ -378,6 +380,12 @@ export class Game {
 
         // Update UI
         this.ui.showScreen('game');
+
+        // Resize canvas now that game screen is visible
+        setTimeout(() => {
+            this.resizeCanvas();
+        }, 0);
+
         this.ui.updateHUD();
         this.ui.updateObjectives();
 
