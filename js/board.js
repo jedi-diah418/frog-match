@@ -185,12 +185,15 @@ export class Board {
 
     // Render the board
     render(ctx, cellSize, offsetX, offsetY) {
+        // Check for dark mode
+        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
         // Draw grid background
-        ctx.fillStyle = '#f7fafc';
+        ctx.fillStyle = isDarkMode ? '#1e2139' : '#f7fafc';
         ctx.fillRect(offsetX, offsetY, this.size * cellSize, this.size * cellSize);
 
         // Draw grid lines
-        ctx.strokeStyle = '#e2e8f0';
+        ctx.strokeStyle = isDarkMode ? '#2d3748' : '#e2e8f0';
         ctx.lineWidth = 1;
 
         for (let i = 0; i <= this.size; i++) {

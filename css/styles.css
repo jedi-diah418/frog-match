@@ -476,3 +476,140 @@ body {
         padding: 10px;
     }
 }
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .screen-content {
+        background: #1e2139;
+        color: #e2e8f0;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .title {
+        color: #e2e8f0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .subtitle {
+        color: #a0aec0;
+    }
+
+    .screen-title {
+        color: #e2e8f0;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-secondary {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+
+    .btn-secondary:hover, .btn-secondary:active {
+        background: #4a5568;
+    }
+
+    .btn-icon {
+        background: rgba(45, 55, 72, 0.9);
+        color: #e2e8f0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .level-button.unlocked {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .level-button.locked {
+        background: #2d3748;
+        color: #4a5568;
+    }
+
+    .hud {
+        background: rgba(30, 33, 57, 0.95);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        border-bottom: 1px solid #2d3748;
+    }
+
+    .hud-label {
+        color: #a0aec0;
+    }
+
+    .hud-value {
+        color: #e2e8f0;
+    }
+
+    .objectives-container {
+        background: rgba(30, 33, 57, 0.9);
+        border: 1px solid #2d3748;
+    }
+
+    .objective-item {
+        color: #cbd5e0;
+    }
+
+    .objective-item.completed {
+        color: #48bb78;
+    }
+
+    #game-canvas {
+        background: rgba(30, 33, 57, 0.95);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal {
+        background: rgba(0, 0, 0, 0.85);
+    }
+
+    .modal-content {
+        background: #1e2139;
+        color: #e2e8f0;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content h2 {
+        color: #e2e8f0;
+    }
+
+    .final-score {
+        color: #cbd5e0;
+    }
+
+    .instruction-item {
+        background: #2d3748;
+        border: 1px solid #4a5568;
+    }
+
+    .instruction-item p {
+        color: #cbd5e0;
+    }
+
+    .setting-item {
+        background: #2d3748;
+        border: 1px solid #4a5568;
+    }
+
+    .setting-item label {
+        color: #e2e8f0;
+    }
+
+    .toggle {
+        background: #4a5568;
+    }
+
+    .toggle:checked {
+        background: #48bb78;
+    }
+
+    /* Board grid in dark mode */
+    .game-board-container canvas {
+        border: 1px solid #2d3748;
+    }
+}

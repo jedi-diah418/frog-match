@@ -418,8 +418,11 @@ export class Game {
     }
 
     render() {
+        // Check for dark mode
+        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
         // Clear canvas
-        this.ctx.fillStyle = '#f7fafc';
+        this.ctx.fillStyle = isDarkMode ? '#1e2139' : '#f7fafc';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // Render board
@@ -428,7 +431,7 @@ export class Game {
         // Highlight selected frog
         if (this.selectedFrog && this.state === GameState.PLAYING) {
             const { row, col } = this.selectedFrog;
-            this.ctx.strokeStyle = '#667eea';
+            this.ctx.strokeStyle = isDarkMode ? '#9f7aea' : '#667eea';
             this.ctx.lineWidth = 3;
             this.ctx.strokeRect(
                 this.boardOffsetX + col * this.cellSize,
